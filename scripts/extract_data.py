@@ -77,5 +77,5 @@ def process_pdf_directory(directory):
 
 
 # Uso do exemplo
-pdf_directory = "Documentos/Faturas/Instalação_ 3000055479"
+pdf_directory = "/home/beatrizesteves/Documentos/Faturas"
 process_pdf_directory(pdf_directory)

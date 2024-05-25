@@ -1,20 +1,26 @@
-// models/DetalhesFatura.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-
-const DetalhesFatura = sequelize.define('DetalhesFatura', {
-  tipo: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  quantidade_kwh: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  valor: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  }
-});
-
-module.exports = DetalhesFatura;
+// DetalhesFatura.js
+module.exports = (sequelize, DataTypes) => {
+  const DetalhesFatura = sequelize.define('DetalhesFatura', {
+      // Definição dos campos
+      // Exemplo:
+      // id: {
+      //     type: DataTypes.INTEGER,
+      //     primaryKey: true,
+      //     autoIncrement: true
+      // },
+      // faturaId: {
+      //     type: DataTypes.INTEGER,
+      //     references: {
+      //         model: 'Faturas', // Nome da tabela de referência
+      //         key: 'id'
+      //     }
+      // },
+      // descricao: DataTypes.STRING
+  }, {});
+  DetalhesFatura.associate = function(models) {
+      // Definição das associações
+      // Exemplo:
+      // DetalhesFatura.belongsTo(models.Fatura, { foreignKey: 'faturaId' });
+  };
+  return DetalhesFatura;
+};
