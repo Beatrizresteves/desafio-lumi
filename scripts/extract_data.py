@@ -7,8 +7,8 @@ import requests
 def extract_data_from_text(text):
     # Defina regex patterns para extrair informações relevantes
     patterns = {
-        "no_do_cliente": re.compile(r"Nº DO CLIENTE\s+(\d+)"),
-        "referente_a": re.compile(r"Referente a\s+([A-Z]{3}/\d{4})"),
+        "no_do_cliente": re.compile(r"Nº DO CLIENTE\s+Nº DA INSTALAÇÃO\s+\d{2}\.\d{2}\.\d{4}\s+às\s+\d{2}:\d{2}:\d{2}\s+(\d+)\s"),
+        "referente_a": re.compile(r"\b([A-Z]{3}/\d{4})\b"),
         "energia_eletrica_kwh": re.compile(r"Energia Elétrica kWh\s+(\d+)"),
         "energia_eletrica_valor": re.compile(r"Energia Elétrica kWh\s+\d+\s+\d+,\d+\s+(\d+,\d+)"),
         "energia_sceee_kwh": re.compile(r"Energia SCEE ISENTA kWh\s+(\d+)"),
