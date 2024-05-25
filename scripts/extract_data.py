@@ -13,7 +13,7 @@ def extract_data_from_pdf(pdf_path):
 
         # Defina regex patterns para extrair informações relevantes
         patterns = {
-            "no_do_cliente": re.compile(r"No DO CLIENTE:\s*(\d+)"),
+            "no_do_cliente": re.compile(r"Nº DO CLIENTE:"),
             "referente_a": re.compile(r"Referente a:\s*([\w\s]+)"),
             "energia_eletrica_kwh": re.compile(r"Energia Elétrica\s*\(kWh\):\s*(\d+)"),
             "energia_eletrica_valor": re.compile(r"Energia Elétrica\s*\(R\$\):\s*([\d,]+)"),
@@ -27,6 +27,10 @@ def extract_data_from_pdf(pdf_path):
         extracted_data = {}
         for key, pattern in patterns.items():
             match = pattern.search(text)
+            if match:
+                print(f"{key}: {match.group(1)}")
+            else:
+                print(f"No match found for {key}")
             extracted_data[key] = match.group(1) if match else None
 
         # Converta os valores numéricos extraídos para os tipos apropriados
