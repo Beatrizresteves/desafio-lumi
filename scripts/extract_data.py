@@ -1,5 +1,8 @@
+import requests
 import pdfplumber
 import re
+import os
+from datetime import datetime
 
 
 def extract_data_from_pdf(pdf_path):
@@ -8,7 +11,7 @@ def extract_data_from_pdf(pdf_path):
         for page in pdf.pages:
             text += page.extract_text()
 
-        # Define regex patterns to extract relevant information
+        # Defina regex patterns para extrair informações relevantes
         patterns = {
             "no_do_cliente": re.compile(r"No DO CLIENTE:\s*(\d+)"),
             "referente_a": re.compile(r"Referente a:\s*([\w\s]+)"),
@@ -26,7 +29,7 @@ def extract_data_from_pdf(pdf_path):
             match = pattern.search(text)
             extracted_data[key] = match.group(1) if match else None
 
-        # Convert extracted numeric values to appropriate types
+        # Converta os valores numéricos extraídos para os tipos apropriados
         if extracted_data["energia_eletrica_valor"]:
             extracted_data["energia_eletrica_valor"] = float(
                 extracted_data["energia_eletrica_valor"].replace(',', '.'))
@@ -43,7 +46,36 @@ def extract_data_from_pdf(pdf_path):
         return extracted_data
 
 
-# Example usage
-pdf_path = "path/to/your/fatura.pdf"
-data = extract_data_from_pdf(pdf_path)
-print(data)
+def insert_data_to_db(data):
+    url = 'http://localhost:3000/faturas'
+    fatura_data = {
+        "referencia": data['referente_a'],
+        "quantidadeEnergia": data['energia_eletrica_kwh'],
+        "valorEnergia": data['energia_eletrica_valor'],
+        "quantidadeSCEEE": data['energia_sceee_kwh'],
+        "valorSCEEE": data['energia_sceee_valor'],
+        "quantidadeCompensada": data['energia_compensada_kwh'],
+        "valorCompensada": data['energia_compensada_valor'],
+        "valorIluminacaoPublica": data['contrib_ilum_valor'],
+        "createdAt": datetime.now().isoformat(),
+        "updatedAt": datetime.now().isoformat()
+    }
+    response = requests.post(url, json=fatura_data)
+    if response.status_code == 201:
+        print('Fatura inserida com sucesso!')
+    else:
+        print('Falha ao inserir a fatura:', response.text)
+
+
+def process_pdf_directory(directory):
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".pdf"):
+                pdf_path = os.path.join(root, file)
+                data = extract_data_from_pdf(pdf_path)
+                insert_data_to_db(data)
+
+
+# Uso do exemplo
+pdf_directory = "Documentos/Faturas/Instalação_ 3000055479"
+process_pdf_directory(pdf_directory)

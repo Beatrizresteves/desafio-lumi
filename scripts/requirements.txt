@@ -1,2 +1,4 @@
-pdfplumber==0.11.0
-psycopg2-binary==2.9.9
+pdfplumber==0.5.28
+sqlalchemy==1.4.31
+psycopg2==2.9.2
+requests==2.32.2
