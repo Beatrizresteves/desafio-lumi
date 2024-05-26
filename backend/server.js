@@ -1,32 +1,14 @@
 const express = require('express');
 const app = express();
-const models = require('./models');
+const faturaController = require('./controllers/faturaController');
 
 app.use(express.json());
 
-// Endpoint para obter uma fatura por ID
-app.get('/faturas/:id', async (req, res) => {
-  try {
-    const fatura = await models.Fatura.findByPk(req.params.id);
-    if (fatura) {
-      res.json(fatura);
-    } else {
-      res.status(404).send('Fatura não encontrada');
-    }
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
+// Rota para obter uma fatura pelo ID
+app.get('/faturas/:id', faturaController.getFaturaById);
 
-// Endpoint para criar uma nova fatura
-app.post('/faturas', async (req, res) => {
-  try {
-    const fatura = await models.Fatura.create(req.body);
-    res.status(201).json(fatura);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
+// Rota para criar uma nova fatura
+app.post('/faturas', faturaController.createFatura);
 
 // Outros endpoints conforme necessário...
 
