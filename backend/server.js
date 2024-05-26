@@ -1,13 +1,20 @@
+const axios = require('axios');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const faturaController = require('./controllers/faturaController');
 
+const api = axios.create({
+  baseURL: 'http://localhost:3000', // URL do seu backend
+});
+app.use(cors());
 app.use(express.json());
 
 // Rota para obter uma fatura pelo ID
 app.get('/faturas/:id', faturaController.getFaturaById);
 
 app.get('/faturas/', faturaController.faturas);
+
 // Rota para criar uma nova fatura
 app.post('/faturas', faturaController.createFatura);
 
