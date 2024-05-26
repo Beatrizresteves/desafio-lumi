@@ -34,3 +34,39 @@ exports.createFatura = async (req, res) => {
 	  res.status(500).send(error.message);
 	}
 };
+
+exports.getFaturasByNumeroCliente = async (req, res) => {
+	try {
+	  const { numero_cliente } = req.params;
+	  const faturas = await models.Faturas.findAll({
+		where: { numero_cliente }
+	  });
+	  res.status(200).json(faturas);
+	} catch (error) {
+	  res.status(500).send(error.message);
+	}
+  };
+
+
+  // Função para fazer o download de uma fatura
+  exports.downloadFatura = async (req, res) => {
+	try {
+	  const { id } = req.params;
+	  const fatura = await models.Faturas.findByPk(id);
+  
+	  if (!fatura) {
+		return res.status(404).send('Fatura não encontrada');
+	  }
+  
+	  // Supondo que as faturas sejam armazenadas como arquivos PDF em um diretório específico
+	  const filePath = path.join(__dirname, '../faturas', `${id}.pdf`);
+  
+	  if (fs.existsSync(filePath)) {
+		res.download(filePath);
+	  } else {
+		res.status(404).send('Arquivo da fatura não encontrado');
+	  }
+	} catch (error) {
+	  res.status(500).send(error.message);
+	}
+  };

@@ -1,15 +1,19 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
+import BibliotecaFaturas from './components/BibliotecaFaturas';
 
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Dashboard />
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/biblioteca-faturas" element={<BibliotecaFaturas />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
