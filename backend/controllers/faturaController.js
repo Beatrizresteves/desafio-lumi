@@ -26,3 +26,11 @@ exports.createFatura = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+  exports.faturas = async (req, res) => {
+	try {
+	  const faturas = await models.Faturas.findAll(req.body);
+	  res.status(201).json(faturas);
+	} catch (error) {
+	  res.status(500).send(error.message);
+	}
+};

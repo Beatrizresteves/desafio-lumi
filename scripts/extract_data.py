@@ -3,6 +3,8 @@ import pdfplumber
 import os
 from datetime import datetime
 import requests
+from datetime import datetime
+
 
 def extract_data_from_text(text):
     # Defina regex patterns para extrair informações relevantes
