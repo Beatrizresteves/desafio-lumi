@@ -42,6 +42,7 @@ def extract_data_from_pdf(pdf_path):
 def insert_data_to_db(data):
     url = 'http://localhost:3000/faturas'
     fatura_data = {
+        "numero_cliente": data['no_do_cliente'],
         "referencia": data['referente_a'],
         "quantidadeEnergia": int(data['energia_eletrica_kwh']) if data['energia_eletrica_kwh'] else None,
         "valorEnergia": float(data['energia_eletrica_valor']) if data['energia_eletrica_valor'] else None,

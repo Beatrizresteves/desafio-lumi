@@ -8,6 +8,11 @@ module.exports = (sequelize) => {
   }
 
   Fatura.init({
+      numero_cliente: { // Adiciona o campo numeroCliente
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'numero_cliente' // Nome da coluna no banco de dados
+      },
       referencia: {
         type: DataTypes.STRING,
         allowNull: false
