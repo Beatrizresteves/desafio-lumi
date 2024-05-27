@@ -68,6 +68,6 @@ def process_pdf_directory(directory):
                 data = extract_data_from_pdf(pdf_path)
                 insert_data_to_db(data)
 
-# Exemplo de uso
-pdf_directory = "/home/beatrizesteves/Documentos/Faturas"
+
+pdf_directory = "path_faturas" # Substitua pelo caminho das faturas
 process_pdf_directory(pdf_directory)
