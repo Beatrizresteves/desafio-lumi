@@ -24,7 +24,7 @@ app.post('/faturas', faturaController.createFatura);
 app.get('/faturas-por-cliente/:numero_cliente', faturaController.getFaturasByNumeroCliente);
 
 // Rota para fazer o download de uma fatura
-app.post('/faturas-download', faturaController.downloadFatura);
+app.post('/faturas-download/:id', faturaController.downloadFatura);
 
 // Outros endpoints conforme necessário...
 

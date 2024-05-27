@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryLegend } from 'victory';
-import { FaArrowLeft } from 'react-icons/fa'; // Importando o ícone de seta para a esquerda
+import { FaArrowLeft } from 'react-icons/fa';
 import { getFaturas, getFaturasByNumeroCliente } from '../services/api';
 
 const Dashboard = () => {
@@ -13,17 +13,20 @@ const Dashboard = () => {
       try {
         let response;
         if (numeroCliente) {
-          response = await getFaturasByNumeroCliente(parseInt(numeroCliente, 10));
+          response = await getFaturasByNumeroCliente(numeroCliente);
         } else {
-          // Se nenhum número de cliente for fornecido, retorna todos os dados
-          // Aqui você precisa chamar a função para obter todas as faturas
           response = await getFaturas();
-          console.log('Obtendo todas as faturas...');
-          return;
         }
-        // Aqui você precisa mapear os dados da resposta para o formato adequado
-        // e atribuí-los aos estados energiaData e valorData
-        console.log('Dados filtrados:', response);
+        const energiaDataFormatted = response.map(fatura => ({
+          x: fatura.referencia,
+          y: fatura.quantidadeEnergia
+        }));
+        const valorDataFormatted = response.map(fatura => ({
+          x: fatura.referencia,
+          y: fatura.valorEnergia + fatura.valorSCEEE + fatura.valorIluminacaoPublica
+        }));
+        setEnergiaData(energiaDataFormatted);
+        setValorData(valorDataFormatted);
       } catch (error) {
         console.error('Erro ao buscar faturas:', error);
       }
@@ -42,52 +45,57 @@ const Dashboard = () => {
 
   return (
     <div>
+
       <h2>Dashboard de Energia Elétrica</h2>
-      <button onClick={handleBack} className="back-button">
-        <FaArrowLeft /> Voltar
-      </button>
-      <div>
+      <div className="navigation">
+        <button onClick={() => window.history.back()} className="back-button">
+          <FaArrowLeft /> Voltar
+        </button>
+      </div>
+      <div  style={{ textAlign: 'center' }}>
         <input
           type="text"
           value={numeroCliente}
           onChange={handleChange}
-          placeholder="Digite o Número do Cliente"
+          placeholder="Digite o número do cliente"
         />
       </div>
-      <div className="chart-container">
-        <VictoryChart theme={VictoryTheme.material}>
-          <VictoryLegend
-            x={50}
-            y={10}
-            orientation="horizontal"
-            gutter={20}
-            data={[{ name: 'Energia (kWh)', symbol: { fill: 'blue' } }]}
-          />
-          <VictoryLine
-            data={energiaData}
-            x="x"
-            y="y"
-            style={{ data: { stroke: 'blue' } }}
-          />
-        </VictoryChart>
-      </div>
-      <div className="chart-container">
-        <VictoryChart theme={VictoryTheme.material}>
-          <VictoryLegend
-            x={50}
-            y={10}
-            orientation="horizontal"
-            gutter={20}
-            data={[{ name: 'Valores Monetários (R$)', symbol: { fill: 'green' } }]}
-          />
-          <VictoryLine
-            data={valorData}
-            x="x"
-            y="y"
-            style={{ data: { stroke: 'green' } }}
-          />
-        </VictoryChart>
-      </div>
+	  <div className='chart-grafic'>
+		<div className="chart-container">
+			<VictoryChart theme={VictoryTheme.material}>
+			<VictoryLegend
+				x={50}
+				y={10}
+				orientation="horizontal"
+				gutter={20}
+				data={[{ name: 'Energia (kWh)', symbol: { fill: 'blue' } }]}
+			/>
+			<VictoryLine
+				data={energiaData}
+				x="x"
+				y="y"
+				style={{ data: { stroke: 'blue' } }}
+			/>
+			</VictoryChart>
+		</div>
+		<div className="chart-container">
+			<VictoryChart theme={VictoryTheme.material}>
+			<VictoryLegend
+				x={50}
+				y={10}
+				orientation="horizontal"
+				gutter={20}
+				data={[{ name: 'Valores Monetários (R$)', symbol: { fill: 'green' } }]}
+			/>
+			<VictoryLine
+				data={valorData}
+				x="x"
+				y="y"
+				style={{ data: { stroke: 'green' } }}
+			/>
+			</VictoryChart>
+		</div>
+	  </div>
     </div>
   );
 };
