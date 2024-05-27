@@ -2,9 +2,59 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.buttonFat {
+  border-radius: 6px;
+  border: none;
+  padding: 15px;
+  margin-left: 10px;
+}
+
+input {
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  width: 164px;
+
+}
+
+
+h1 {
+font-size: 60px;
+color: antiquewhite;
+}
+
+h2 {
+  color: antiquewhite;
+  text-align: inherit;
+  font-size: 25px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333333; /* Cinza escuro para o texto */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Tornar a página ocupar a altura total da tela */
+  background: linear-gradient(135deg, #00539F, #66B2FF); /* Gradiente de azul */
+}
+
+.container {
+  text-align: center;
+}
+
+
+.home-page {
+  text-align: center;
+  margin-top: 100px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,23 +78,64 @@
   color: #61dafb;
 }
 
-/* App.css */
-.home-page {
-  text-align: center;
-  margin-top: 100px;
-}
+
 
 .nav-link {
-  color: #007bff;
   text-decoration: none;
   font-size: 18px;
   margin: 10px;
+  border: 1px solid;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #00539f;
+}
+
+p {
+  margin: 32px;
+  text-align: center;
+
+}
+
+ul {
+  text-align: initial;
+  list-style-type: none;
 }
 
 .nav-link:hover {
   text-decoration: underline;
 }
 
+ul li {
+  border-radius: 4px;
+  margin-top: 4px;
+  height: 30px;
+  color: #FFFFFF;
+  vertical-align: middle;
+
+}
+
+ul li button {
+  background-color: #00539f;
+  color: #FFFFFF;
+  border: none;
+  height: 25px;
+}
+
+/* Botões */
+.button {
+  background-color: #FFFFFF; /* Branco */
+  color: #00539F; /* Azul Escuro */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #66B2FF; /* Azul Claro */
+  color: #FFFFFF; /* Branco */
+}
 
 @keyframes App-logo-spin {
   from {

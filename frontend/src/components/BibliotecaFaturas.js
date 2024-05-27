@@ -48,7 +48,7 @@ const BibliotecaFaturas = () => {
         onChange={handleInputChange}
         placeholder="Digite o Número do Cliente"
       />
-      <button onClick={fetchFaturas}>Buscar Faturas</button>
+      <button onClick={fetchFaturas} className='buttonFat'>Buscar Faturas</button>
       <ul>
         {faturas.map((fatura) => (
           <li key={fatura.id}>

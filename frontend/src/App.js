@@ -9,15 +9,15 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <h1>Bem-vindo!</h1>
-      <p>Escolha uma opção:</p>
+      <h2>Escolha uma opção:</h2>
       <nav>
         <ul>
-          <li>
+          <p>
             <Link to="/dashboard" className="nav-link">Dashboard</Link>
-          </li>
-          <li>
+          </p>
+          <p>
             <Link to="/biblioteca-faturas" className="nav-link">Biblioteca de Faturas</Link>
-          </li>
+          </p>
         </ul>
       </nav>
     </div>
