@@ -122,6 +122,26 @@ ul li button {
   height: 25px;
 }
 
+.navigation {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.back-button svg {
+  margin-right: 5px;
+}
+
 /* Botões */
 .button {
   background-color: #FFFFFF; /* Branco */

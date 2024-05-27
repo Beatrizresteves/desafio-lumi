@@ -1,5 +1,6 @@
 import React from 'react';
 import { VictoryChart, VictoryLine, VictoryTheme } from 'victory';
+import { FaArrowLeft } from 'react-icons/fa'; // Importando o ícone de seta para a esquerda
 
 const Dashboard = () => {
   const data = [
@@ -13,6 +14,9 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard de Energia Elétrica</h2>
+	  <button onClick={() => window.history.back()} className="back-button">
+          <FaArrowLeft /> Voltar
+      </button>
       <VictoryChart theme={VictoryTheme.material}>
         <VictoryLine
           data={data}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getFaturasByNumeroCliente, downloadFatura } from '../services/api';
+import { FaArrowLeft } from 'react-icons/fa'; // Importando o ícone de seta para a esquerda
+import '../App'; // Importando o arquivo CSS para estilização
 
 const BibliotecaFaturas = () => {
   const [numero_cliente, setNumeroCliente] = useState('');
@@ -42,6 +44,11 @@ const BibliotecaFaturas = () => {
   return (
     <div>
       <h2>Biblioteca de Faturas</h2>
+      <div className="navigation">
+        <button onClick={() => window.history.back()} className="back-button">
+          <FaArrowLeft /> Voltar
+        </button>
+      </div>
       <input
         type="text"
         value={numero_cliente}
